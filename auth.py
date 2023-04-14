@@ -1,7 +1,7 @@
 
 import pyrebase
 import requests
-
+import json
 
 
 
@@ -25,6 +25,10 @@ def SendResetPassword(email):
     user = auth.send_password_reset_email(email)
     return user
 
+class EmailExiste(Exception):
+    pass
+class SenhaErrada(Exception):
+    pass
 
 def CreateUserFirebase(email, senha):
 
@@ -43,20 +47,16 @@ def CreateUserFirebase(email, senha):
     auth = firebase.auth()
 
     try:
-        user = auth.create_user_with_email_and_password(email, senha)
-        return user
+        return auth.create_user_with_email_and_password(email, senha)
     except requests.exceptions.HTTPError as e:
-        error_json = e.response
-        error_message = error_json['error']['message']
-        if error_message == "EMAIL_EXISTS":
-            print("O e-mail informado já está em uso.")
+        print(e.__class__.__name__)
+        if "EMAIL_EXISTS" in str(e):
+            raise EmailExiste()
         else:
-            print("Ocorreu um erro ao criar o usuário:", error_message)
+            raise e
     except Exception as e:
         print("Ocorreu um erro ao criar o usuário:", e)
-
-
-    return user
+        raise e
 
 
 
@@ -79,13 +79,17 @@ def SignFirebase(email,senha):
     try:
         user = auth.sign_in_with_email_and_password(email, senha)
     except requests.exceptions.HTTPError as e:
-        error_json = e.response.json()
-        error_message = error_json["error"]["message"]
+        print(e.__class__.__name__)
+        if "INVALID_PASSWORD" in str(e) or "EMAIL_NOT_FOUND" in str(e):
+            raise SenhaErrada()
+        else:
+            raise e
     except Exception as e:
-        print("Ocorreu um erro ao criar o usuário:", error_message)
+        print("Ocorreu um erro ao logar o usuário:", e)
+        raise e
 
 
-    return user
+
 
 
 
