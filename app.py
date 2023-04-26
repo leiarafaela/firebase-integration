@@ -1,6 +1,6 @@
 from flask import Flask, session, render_template, request, redirect, make_response
 from auth import SendResetPassword, CreateUserFirebase, SignFirebase, EmailExiste, SenhaErrada
-
+import requests
 app = Flask(__name__)
 
 
@@ -17,14 +17,36 @@ def index():
 
 @app.route('/', methods=['POST','GET'])
 def create():
+    errors = {}
     if request.method == 'POST':
         email = request.form.get('email')
         senha = request.form.get('senha')
+        recaptcha_response = request.form['g-recaptcha-response']
+
         if senha == "":
             return "Senha invalida"
         if email == "":
             return "Email invalido"
         
+
+        recaptcha_request = requests.post(
+            'https://www.google.com/recaptcha/api/siteverify',
+            data={
+                'secret': '6LeLWLolAAAAAPnEPXXHK8C5vQLMPw33G06owDUT',
+                'response': recaptcha_response
+            }
+        ).json()
+
+        if not recaptcha_request.get('success'):
+            errors['recaptcha'] = True
+
+
+        if errors:
+            return render_template('cadastro.html', errors=errors)
+
+
+
+
         try:
             user = CreateUserFirebase(email, senha)
             print(f"User ===> {user}")
@@ -35,8 +57,10 @@ def create():
             return "Já tem o e-mail.", 400
         except Exception as e:
             return str(e), 400
-    
-    return render_template('cadastro.html')
+        
+
+  
+    return render_template('cadastro.html', errors=errors)
 
 
 @app.route('/login', methods=['POST','GET'])
