@@ -1,8 +1,11 @@
 from flask import Flask, session, render_template, request, redirect, make_response
 from auth import SendResetPassword, CreateUserFirebase, SignFirebase, EmailExiste, SenhaErrada
 import requests
-app = Flask(__name__)
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
+app = Flask(__name__)
 
 @app.route('/reset', methods=['POST', 'GET'])
 def index():
@@ -32,7 +35,7 @@ def create():
         recaptcha_request = requests.post(
             'https://www.google.com/recaptcha/api/siteverify',
             data={
-                'secret': '6LeLWLolAAAAAPnEPXXHK8C5vQLMPw33G06owDUT',
+                'secret': os.getenv('SECRETRECAPTCHA'),
                 'response': recaptcha_response
             }
         ).json()
