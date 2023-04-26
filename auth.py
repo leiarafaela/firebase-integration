@@ -2,20 +2,24 @@
 import pyrebase
 import requests
 import json
+import os
+from dotenv import load_dotenv
 
 
+load_dotenv()
 
 
 def SendResetPassword(email):
 
+
     config = {
-    'apiKey': "AIzaSyDMAChNn_jeQKdiqwPQWOLNPiB3GX_PAtM",
-    'authDomain': "ibooks-1fa58.firebaseapp.com",
-    'projectId': "ibooks-1fa58",
-    'storageBucket': "ibooks-1fa58.appspot.com",
-    'messagingSenderId': "516281803999",
-    'appId': "1:516281803999:web:31b0d833009469f4c1b56a",
-    'measurementId': "G-V8JNJ11FDL",
+    'apiKey': os.getenv('APIKEY'),
+    'authDomain': os.getenv('AUTHDOMAIN'),
+    'projectId': os.getenv('PROJECTID'),
+    'storageBucket': os.getenv('STORAGEBUCKET'),
+    'messagingSenderId': os.getenv('MESSAGINGSENDERID'),
+    'appId': os.getenv('APPID'),
+    'measurementId': os.getenv('MEASUREMENTID'),
     'databaseURL': ""
     }
 
@@ -33,13 +37,13 @@ class SenhaErrada(Exception):
 def CreateUserFirebase(email, senha):
 
     config = {
-    'apiKey': "AIzaSyDMAChNn_jeQKdiqwPQWOLNPiB3GX_PAtM",
-    'authDomain': "ibooks-1fa58.firebaseapp.com",
-    'projectId': "ibooks-1fa58",
-    'storageBucket': "ibooks-1fa58.appspot.com",
-    'messagingSenderId': "516281803999",
-    'appId': "1:516281803999:web:31b0d833009469f4c1b56a",
-    'measurementId': "G-V8JNJ11FDL",
+    'apiKey': os.getenv('APIKEY'),
+    'authDomain': os.getenv('AUTHDOMAIN'),
+    'projectId': os.getenv('PROJECTID'),
+    'storageBucket': os.getenv('STORAGEBUCKET'),
+    'messagingSenderId': os.getenv('MESSAGINGSENDERID'),
+    'appId': os.getenv('APPID'),
+    'measurementId': os.getenv('MEASUREMENTID'),
     'databaseURL': ""
     }
 
@@ -63,13 +67,13 @@ def CreateUserFirebase(email, senha):
 def SignFirebase(email,senha):
 
     config = {
-    'apiKey': "AIzaSyDMAChNn_jeQKdiqwPQWOLNPiB3GX_PAtM",
-    'authDomain': "ibooks-1fa58.firebaseapp.com",
-    'projectId': "ibooks-1fa58",
-    'storageBucket': "ibooks-1fa58.appspot.com",
-    'messagingSenderId': "516281803999",
-    'appId': "1:516281803999:web:31b0d833009469f4c1b56a",
-    'measurementId': "G-V8JNJ11FDL",
+    'apiKey': os.getenv('APIKEY'),
+    'authDomain': os.getenv('AUTHDOMAIN'),
+    'projectId': os.getenv('PROJECTID'),
+    'storageBucket': os.getenv('STORAGEBUCKET'),
+    'messagingSenderId': os.getenv('MESSAGINGSENDERID'),
+    'appId': os.getenv('APPID'),
+    'measurementId': os.getenv('MEASUREMENTID'),
     'databaseURL': ""
     }
 
