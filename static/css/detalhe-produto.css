@@ -1,0 +1,31 @@
+.container{
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    justify-items: center;
+    margin-top:80px;
+    padding: 40px;
+  }
+  .detalhes-produto button{
+    box-sizing: border-box;
+    margin: 20px 0;
+    width: 100%;
+    padding: 15px 5px;
+    height: 45px;
+    background-color: transparent;
+    color: #61b111;
+    border: 1px solid #61b111;
+    border-radius: 100px;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+    line-height: 1;
+  }
+  .detalhes-produto button:hover{
+    background-color: #61b111;
+    color: #FFFEFC;
+  }
+  
+  .footer-bg{
+    bottom:0;
+    position: absolute;
+  }

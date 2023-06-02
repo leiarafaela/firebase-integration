@@ -1,9 +1,7 @@
 .container{
   margin-top: 50px;
-  height: 40vh;
   display: flex;
   align-items: center;
-  flex-direction: column;
   justify-content: center;
 }
 
@@ -48,15 +46,19 @@ input {
   border: none;
 }
 
+.container form a{
+  margin-bottom: 10px;
+}
 
-.container form button{
-  width: 140px;
+.container form button, .container form a{
+  width: auto;
   background-color: #E69542 ;
-  padding: 10px;
+  padding: 5px 10px;
   border-radius: 10px;
   border: none;
   color: #fff;
-  font-weight: bold;
+  white-space: nowrap;
+
 }
 
 .cadastro-screen{
@@ -76,3 +78,4 @@ input {
   padding: 10px;
   text-align: center;
 }
+

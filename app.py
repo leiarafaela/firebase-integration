@@ -3,6 +3,8 @@ from auth import SendResetPassword, CreateUserFirebase, SignFirebase, EmailExist
 import requests
 from dotenv import load_dotenv
 import os
+from db.database import Produto
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -18,8 +20,29 @@ def index():
     return render_template('reset-password.html')
 
 
-@app.route('/', methods=['POST','GET'])
-def create():
+@app.route('/home', methods=['GET'])
+def show_index():
+    produtos = Produto.getAll()
+    return render_template('home.html', produtos=produtos)
+
+@app.route('/home', methods=['POST'])
+def post_index():
+    
+    return render_template('home.html')
+
+
+@app.route('/detalhes', methods=['GET'])
+def detalhes_produto():
+    return render_template('detalhe-produto.html')
+
+@app.route('/cadastro', methods=['GET'])
+def get_casdastro():
+    errors = {}
+    return render_template('cadastro.html', errors=errors)
+
+
+@app.route('/cadastro', methods=['POST'])
+def create_user_login():
     errors = {}
     if request.method == 'POST':
         email = request.form.get('email')
@@ -63,10 +86,10 @@ def create():
         
 
   
-    return render_template('cadastro.html', errors=errors)
+    return render_template('home.html', errors=errors)
 
 
-@app.route('/login', methods=['POST','GET'])
+@app.route('/', methods=['POST','GET'])
 def login():
     if request.method == 'POST':
         email = request.form.get('email')

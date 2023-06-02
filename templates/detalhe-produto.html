@@ -10,9 +10,7 @@
       type="image/x-icon"
     />
     <link rel="stylesheet" href="../static/css/default.css" />
-    <!-- <link rel="stylesheet" href="../static/css/index.css" /> -->
-    <link rel="stylesheet" href="../static/css/home.css">
-
+    <link rel="stylesheet" href="../static/css/detalhe-produto.css" />
     <!-- <link
       rel="icon"
       type="image/x-icon"
@@ -24,39 +22,44 @@
     />
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename = 'css/login.css') }}"
+      href="{{ url_for('static', filename = 'css/detalhe-produto.css') }}"
     /> -->
-    <title>IBook</title>
+    <title>Detalhe do produto</title>
   </head>
   <body>
-    <!-- Barra de navegação -->
     <header>
       <nav>
         <a href="/"><img src="../static/img/ibook_logo.png" alt="" /></a>
         <ul class="nav-links">
           <li><a href="/">Home</a></li>
-          <li><a href="">Produtos</a></li>
         </ul>
         <!-- Botão que encaminha para a tela de login -->
         <a class="btn_login" href="/login">
-          <button>Sair</button>
+          <button>Login</button>
         </a>
       </nav>
     </header>
-    <form class="produto" action="/adicionar" method="post"> 
-      {{% for produto in produtos %}}
-      <img
-        src="../static/img/{produto.}"
-        alt=""
-      />
-      <input type="hidden" name="produto_id" value="1">
-      <input type="hidden" name="valor" value="50">
-      <p>Livro 1 de graduação</p>
-        <span>R$ 50</span>
-      <button class="btnComprar" type="submit">Comprar</button>
-    </form>
-    <!-- No href é necessário passar os parametros das rotas, acho que é dessa forma, me corrija se eu estiver errado pf --
-
+    <div class="container">
+      <div class="imagem-produto">
+        <!-- Exemplo -->
+        <!-- <img
+          src="../static/img/Vade-mecum-saraiva-OAB-e-Graduacao.webp"
+          alt=""
+        /> -->
+        <img
+          src="{{ url_for('static', filename = 'img/{{imagem}}') }}"
+          alt="Imagem do Produto"
+        />
+      </div>
+      <div class="detalhes-produto">
+        <!-- <h1>Livro 1 de graduação</h1> -->
+        <h1>{{nome}}</h1>
+        <!-- <p>Preço: R$ 50</p> -->
+        <p>Preço: R$ {{ preco }}</p>
+        <!-- Botão mercado pago -->
+        <button>Comprar</button>
+      </div>
+    </div>
     <footer class="footer-bg">
       <div class="footer-container">
         <div class="sobre">
@@ -70,7 +73,7 @@
         <div class="social">
           <h2>Social</h2>
           <p>SoviOng</p>
-          <p><a href="/parceiros">Lojas</a></p>
+          <p><a href="./cadastro-parceiro.html">Lojas</a></p>
         </div>
       </div>
     </footer>

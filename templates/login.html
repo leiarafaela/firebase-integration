@@ -22,6 +22,19 @@
     <title>Login</title>
   </head>
   <body>
+    <header>
+      <nav>
+        <a href="/"><img src="../static/img/ibook_logo.png" alt="" /></a>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="">Produtos</a></li>
+        </ul>
+        <!-- Botão que encaminha para a tela de login -->
+        <a class="btn_login" href="/login">
+          <button>Sair</button>
+        </a>
+      </nav>
+    </header>
     <section class="container">
       <div class="corpo-forms">
           <form action="/login" method="POST">
@@ -29,13 +42,29 @@
             <input type="text" name="email" placeholder="Email" /><br />
             <br>
             <input type="password" name="senha" placeholder="Senha" /><br />
-            <input type="submit"/>
+            <a href="/home">Enviar</a>
             <a href="/reset">
                 <button type="button">Esqueci minha senha</button>
               </a>
           </form>
       </div>
     </section>
-    <footer></footer>
+    <footer class="footer-bg">
+      <div class="footer-container">
+        <div class="sobre">
+          <h2>Sobre</h2>
+          <p>Dúvidas Frequentes</p>
+        </div>
+        <div class="formas-pagamentos">
+          <h2>Formas de Pagamento</h2>
+          <img src="../static/img/e-footer-formas-de-pagamentos.png" alt="" />
+        </div>
+        <div class="social">
+          <h2>Social</h2>
+          <p>SoviOng</p>
+          <p><a href="/parceiros">Lojas</a></p>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
